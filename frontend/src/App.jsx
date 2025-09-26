@@ -3,9 +3,20 @@ import './App.css'
 
 const API_BASE_URL = 'https://e6itg7gvz6.execute-api.us-east-1.amazonaws.com/dev'
 
+// Frontend version info
+const FRONTEND_VERSION = {
+  name: 'u-control-frontend',
+  version: '1.0.0',
+  description: 'Personal control application frontend',
+  buildTime: new Date().toISOString(),
+  environment: 'production'
+}
+
 function App() {
   const [backendData, setBackendData] = useState(null)
+  const [backendVersion, setBackendVersion] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [versionLoading, setVersionLoading] = useState(false)
   const [error, setError] = useState(null)
 
   const fetchBackendData = async () => {
@@ -25,8 +36,25 @@ function App() {
     }
   }
 
+  const fetchBackendVersion = async () => {
+    setVersionLoading(true)
+    try {
+      const response = await fetch(`${API_BASE_URL}/version`)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const data = await response.json()
+      setBackendVersion(data)
+    } catch (err) {
+      console.error('Error fetching version:', err)
+    } finally {
+      setVersionLoading(false)
+    }
+  }
+
   useEffect(() => {
     fetchBackendData()
+    fetchBackendVersion()
   }, [])
 
   return (
@@ -103,6 +131,74 @@ function App() {
               <span className="status-icon">🔐</span>
               <span>Autenticación: JWT</span>
             </div>
+          </div>
+        </div>
+
+        <div className="card">
+          <h2>📦 Información de Versiones</h2>
+          
+          {/* Frontend Version */}
+          <div className="version-section">
+            <h3>🖥️ Frontend</h3>
+            <div className="version-info">
+              <div className="version-item">
+                <strong>Nombre:</strong> {FRONTEND_VERSION.name}
+              </div>
+              <div className="version-item">
+                <strong>Versión:</strong> 
+                <span className="version-badge">v{FRONTEND_VERSION.version}</span>
+              </div>
+              <div className="version-item">
+                <strong>Descripción:</strong> {FRONTEND_VERSION.description}
+              </div>
+              <div className="version-item">
+                <strong>Build Time:</strong> {new Date(FRONTEND_VERSION.buildTime).toLocaleString()}
+              </div>
+              <div className="version-item">
+                <strong>Entorno:</strong> 
+                <span className="status-success">{FRONTEND_VERSION.environment}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Backend Version */}
+          <div className="version-section">
+            <h3>⚡ Backend</h3>
+            {versionLoading ? (
+              <div className="loading">🔄 Cargando información de versión...</div>
+            ) : backendVersion ? (
+              <div className="version-info">
+                <div className="version-item">
+                  <strong>Servicio:</strong> {backendVersion.service}
+                </div>
+                <div className="version-item">
+                  <strong>Versión:</strong> 
+                  <span className="version-badge">v{backendVersion.version}</span>
+                </div>
+                <div className="version-item">
+                  <strong>Descripción:</strong> {backendVersion.description}
+                </div>
+                <div className="version-item">
+                  <strong>Stage:</strong> 
+                  <span className="status-success">{backendVersion.stage}</span>
+                </div>
+                <div className="version-item">
+                  <strong>Región:</strong> {backendVersion.environment.region}
+                </div>
+                <div className="version-item">
+                  <strong>Node.js:</strong> {backendVersion.environment.node}
+                </div>
+                <div className="version-item">
+                  <strong>Build Time:</strong> {new Date(backendVersion.build.timestamp).toLocaleString()}
+                </div>
+                <div className="version-item">
+                  <strong>Git Commit:</strong> 
+                  <code className="git-commit">{backendVersion.build.git.commit}</code>
+                </div>
+              </div>
+            ) : (
+              <div className="error">❌ No se pudo cargar la información de versión</div>
+            )}
           </div>
         </div>
       </main>

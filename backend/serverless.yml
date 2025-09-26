@@ -36,6 +36,18 @@ functions:
           path: hello
           method: options
           cors: true
+  
+  version:
+    handler: src/handlers/version.handler
+    events:
+      - http:
+          path: version
+          method: get
+          cors: true
+      - http:
+          path: version
+          method: options
+          cors: true
     package:
       patterns:
         - '!node_modules/.cache/**'

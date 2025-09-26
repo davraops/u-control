@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "description": "u-control backend API - Personal control application backend",
   "main": "index.js",
   "scripts": {
     "dev": "serverless offline",
