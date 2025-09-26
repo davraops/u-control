@@ -11,6 +11,13 @@ npm run build
 echo "☁️ Subiendo a S3..."
 aws s3 sync dist/ s3://avellaconsulting.com/u-control/ --delete
 
+# Ensure robots.txt is properly deployed
+echo "🤖 Configurando robots.txt para no indexación..."
+aws s3 cp s3://avellaconsulting.com/u-control/robots.txt s3://avellaconsulting.com/u-control/robots.txt \
+  --metadata-directive REPLACE \
+  --content-type "text/plain" \
+  --cache-control "public, max-age=86400"
+
 # Set cache headers
 echo "⚙️ Configurando headers de cache..."
 aws s3 cp s3://avellaconsulting.com/u-control/index.html s3://avellaconsulting.com/u-control/index.html \
