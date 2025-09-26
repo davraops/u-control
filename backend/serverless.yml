@@ -32,9 +32,25 @@ functions:
           path: hello
           method: get
           cors: true
+    package:
+      patterns:
+        - '!node_modules/.cache/**'
+        - '!**/__tests__/**'
+        - '!**/*.test.js'
+        - '!**/*.spec.js'
 
 plugins:
   - serverless-offline
+
+build:
+  esbuild:
+    bundle: true
+    minify: true
+    sourcemap: false
+    exclude:
+      - 'aws-sdk'
+    target: 'node18'
+    platform: 'node'
 
 custom:
   serverless-offline:
