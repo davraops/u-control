@@ -1,8 +1,18 @@
 const pool = require('../config/database');
 const { generateToken } = require('../config/jwt');
 const config = require('../config/env');
+const { corsHeaders } = require('../middleware/cors');
 
 module.exports.handler = async (event, context) => {
+  // Handle CORS preflight requests
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: corsHeaders,
+      body: ''
+    };
+  }
+
   try {
     // Debug configuration
     console.log('Configuration loaded:', {
@@ -31,10 +41,8 @@ module.exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+        ...corsHeaders,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         message: 'Hello from u-control backend!',
@@ -55,10 +63,8 @@ module.exports.handler = async (event, context) => {
     return {
       statusCode: 500,
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+        ...corsHeaders,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         message: 'Error connecting to database',

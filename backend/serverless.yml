@@ -32,6 +32,10 @@ functions:
           path: hello
           method: get
           cors: true
+      - http:
+          path: hello
+          method: options
+          cors: true
     package:
       patterns:
         - '!node_modules/.cache/**'

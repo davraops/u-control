@@ -91,7 +91,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "u-control-906421059987",
-          "S3Key": "serverless/u-control-backend/dev/1758901988088-2025-09-26T15:53:08.088Z/u-control-backend.zip"
+          "S3Key": "serverless/u-control-backend/dev/1758906750227-2025-09-26T17:12:30.227Z/u-control-backend.zip"
         },
         "Handler": "src/handlers/hello.handler",
         "Runtime": "nodejs18.x",
@@ -120,14 +120,14 @@
         "HelloLogGroup"
       ]
     },
-    "HelloLambdaVersionGPEQqcG8CuYXqZI6zgY37LjH5W1dwcnsCxaglLx3Z4": {
+    "HelloLambdaVersionD9uC8yiudAJZao5DjY3XdNnskTBJ0JplvwS1dLW00vU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "JXUpeh9Gt1R7FLMBQ8jbkp9PoXxBdGaTgSOD/OWH6oc="
+        "CodeSha256": "gBKA+NFGgQaLmcjH38QrirL3Gi0tJiaYCvg7vesJ33s="
       }
     },
     "ApiGatewayRestApi": {
@@ -175,7 +175,7 @@
         ],
         "RequestParameters": {},
         "Integration": {
-          "Type": "MOCK",
+          "Type": "AWS_PROXY",
           "RequestTemplates": {
             "application/json": "{statusCode:200}"
           },
@@ -192,15 +192,43 @@
                 "application/json": ""
               }
             }
-          ]
+          ],
+          "IntegrationHttpMethod": "POST",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "HelloLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceHello"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
-        }
-      }
+        },
+        "ApiKeyRequired": false
+      },
+      "DependsOn": [
+        "HelloLambdaPermissionApiGateway"
+      ]
     },
     "ApiGatewayMethodHelloGet": {
       "Type": "AWS::ApiGateway::Method",
@@ -248,7 +276,7 @@
         "HelloLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1758901982712": {
+    "ApiGatewayDeployment1758906744044": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -258,7 +286,8 @@
       },
       "DependsOn": [
         "ApiGatewayMethodHelloOptions",
-        "ApiGatewayMethodHelloGet"
+        "ApiGatewayMethodHelloGet",
+        "ApiGatewayMethodHelloOptions"
       ]
     },
     "HelloLambdaPermissionApiGateway": {
@@ -309,7 +338,7 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionGPEQqcG8CuYXqZI6zgY37LjH5W1dwcnsCxaglLx3Z4"
+        "Ref": "HelloLambdaVersionD9uC8yiudAJZao5DjY3XdNnskTBJ0JplvwS1dLW00vU"
       },
       "Export": {
         "Name": "sls-u-control-backend-dev-HelloLambdaFunctionQualifiedArn"
