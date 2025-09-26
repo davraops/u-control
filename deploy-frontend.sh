@@ -18,13 +18,23 @@ aws s3 cp s3://avellaconsulting.com/u-control/index.html s3://avellaconsulting.c
   --cache-control "no-cache, no-store, must-revalidate" \
   --content-type "text/html"
 
+# Set correct MIME types for assets
+echo "⚙️ Configurando tipos MIME correctos..."
 aws s3 cp s3://avellaconsulting.com/u-control/assets/ s3://avellaconsulting.com/u-control/assets/ \
   --recursive \
   --metadata-directive REPLACE \
   --cache-control "public, max-age=31536000" \
   --exclude "*" \
   --include "*.js" \
-  --include "*.css"
+  --content-type "application/javascript"
+
+aws s3 cp s3://avellaconsulting.com/u-control/assets/ s3://avellaconsulting.com/u-control/assets/ \
+  --recursive \
+  --metadata-directive REPLACE \
+  --cache-control "public, max-age=31536000" \
+  --exclude "*" \
+  --include "*.css" \
+  --content-type "text/css"
 
 # Invalidate CloudFront cache
 echo "🔄 Invalidando cache de CloudFront..."
