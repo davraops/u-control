@@ -26,7 +26,24 @@ aws s3 cp s3://avellaconsulting.com/u-control/assets/ s3://avellaconsulting.com/
   --include "*.js" \
   --include "*.css"
 
+# Invalidate CloudFront cache
+echo "🔄 Invalidando cache de CloudFront..."
+INVALIDATION_ID=$(aws cloudfront create-invalidation \
+  --distribution-id E251VRQ4UH2ONB \
+  --paths "/u-control/*" "/u-control/index.html" \
+  --query "Invalidation.Id" \
+  --output text)
+
+echo "⏳ Invalidación creada: $INVALIDATION_ID"
+echo "🔄 Esperando completar invalidación..."
+
+# Wait for invalidation to complete
+aws cloudfront wait invalidation-completed \
+  --distribution-id E251VRQ4UH2ONB \
+  --id $INVALIDATION_ID
+
 echo "✅ Frontend desplegado exitosamente!"
 echo "🌐 URL: https://avellaconsulting.com/u-control/"
+echo "☁️ CloudFront: Cache invalidado y actualizado"
 echo ""
-echo "💡 Si ves la versión anterior, haz Ctrl+F5 para forzar la recarga"
+echo "💡 La nueva versión debería estar disponible ahora"
