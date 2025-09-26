@@ -1,0 +1,125 @@
+{
+  "/home/rafael/Documents/u-control/backend/serverless.yml": {
+    "versionFramework": "4.19.1",
+    "servicePath": "/home/rafael/Documents/u-control/backend/serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "u-control-backend",
+      "frameworkVersion": "4",
+      "configValidationMode": "error",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs18.x",
+        "stage": "dev",
+        "region": "us-east-1",
+        "deploymentBucket": {
+          "name": "u-control-906421059987",
+          "serverSideEncryption": "AES256"
+        },
+        "environment": {
+          "STAGE": "${self:provider.stage}",
+          "PG_HOST": "db-dev.tarotencalma.com",
+          "PG_PORT": 5432,
+          "PG_DATABASE": "u-control",
+          "PG_USER": "davra",
+          "PG_PASSWORD": "<REDACTED>",
+          "JWT_SECRET": "<REDACTED>"
+        },
+        "iamRoleStatements": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "dynamodb:Query",
+              "dynamodb:Scan",
+              "dynamodb:GetItem",
+              "dynamodb:PutItem",
+              "dynamodb:UpdateItem",
+              "dynamodb:DeleteItem"
+            ],
+            "Resource": "*"
+          }
+        ]
+      },
+      "functions": {
+        "hello": {
+          "handler": "src/handlers/hello.handler",
+          "events": [
+            {
+              "http": {
+                "path": "hello",
+                "method": "get",
+                "cors": true
+              }
+            }
+          ]
+        }
+      },
+      "plugins": [
+        "serverless-offline"
+      ],
+      "custom": {
+        "serverless-offline": {
+          "httpPort": 3001,
+          "host": "0.0.0.0",
+          "environment": {
+            "PG_HOST": "db-dev.tarotencalma.com",
+            "PG_PORT": 5432,
+            "PG_DATABASE": "u-control",
+            "PG_USER": "davra",
+            "PG_PASSWORD": "<REDACTED>",
+            "JWT_SECRET": "<REDACTED>"
+          }
+        }
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs18.x",
+      "stage": "dev",
+      "region": "us-east-1",
+      "deploymentBucket": {
+        "name": "u-control-906421059987",
+        "serverSideEncryption": "AES256"
+      },
+      "environment": {
+        "STAGE": "${self:provider.stage}",
+        "PG_HOST": "db-dev.tarotencalma.com",
+        "PG_PORT": 5432,
+        "PG_DATABASE": "u-control",
+        "PG_USER": "davra",
+        "PG_PASSWORD": "<REDACTED>",
+        "JWT_SECRET": "<REDACTED>"
+      },
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:Query",
+            "dynamodb:Scan",
+            "dynamodb:GetItem",
+            "dynamodb:PutItem",
+            "dynamodb:UpdateItem",
+            "dynamodb:DeleteItem"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "error": {
+      "message": "You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".",
+      "stack": "Error: You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".\n    at Authentication.getAuthenticatedData (file:///home/rafael/.serverless/releases/4.19.1/package/dist/sf-core.js:708:10911)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Authentication.authenticate (file:///home/rafael/.serverless/releases/4.19.1/package/dist/sf-core.js:710:22266)\n    at async TraditionalRunner.resolveVariablesAndAuthenticate (file:///home/rafael/.serverless/releases/4.19.1/package/dist/sf-core.js:714:2379)\n    at async TraditionalRunner.run (file:///home/rafael/.serverless/releases/4.19.1/package/dist/sf-core.js:1333:27914)\n    at async route (file:///home/rafael/.serverless/releases/4.19.1/package/dist/sf-core.js:1508:2878)\n    at async Object.run (file:///home/rafael/.serverless/releases/4.19.1/package/dist/sf-core.js:1509:3661)\n    at async run2 (file:///home/rafael/.serverless/releases/4.19.1/package/dist/sf-core.js:1509:4815)"
+    },
+    "serviceRawFile": "service: u-control-backend\n\nframeworkVersion: '4'\n\n# Configuración del estado en S3\nconfigValidationMode: error\n\nprovider:\n  name: aws\n  runtime: nodejs18.x\n  stage: ${opt:stage, 'dev'}\n  region: us-east-1\n  deploymentBucket:\n    name: u-control-906421059987\n    serverSideEncryption: AES256\n  environment:\n    STAGE: ${self:provider.stage}\n    PG_HOST: db-dev.tarotencalma.com\n    PG_PORT: 5432\n    PG_DATABASE: u-control\n    PG_USER: davra\n    PG_PASSWORD: 123qweZ!\n    JWT_SECRET: 123qweZ!\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - dynamodb:Query\n        - dynamodb:Scan\n        - dynamodb:GetItem\n        - dynamodb:PutItem\n        - dynamodb:UpdateItem\n        - dynamodb:DeleteItem\n      Resource: \"*\"\n\nfunctions:\n  hello:\n    handler: src/handlers/hello.handler\n    events:\n      - http:\n          path: hello\n          method: get\n          cors: true\n\nplugins:\n  - serverless-offline\n\ncustom:\n  serverless-offline:\n    httpPort: 3001\n    host: 0.0.0.0\n    environment:\n      PG_HOST: db-dev.tarotencalma.com\n      PG_PORT: 5432\n      PG_DATABASE: u-control\n      PG_USER: davra\n      PG_PASSWORD: 123qweZ!\n      JWT_SECRET: 123qweZ!\n",
+    "command": [
+      "offline"
+    ],
+    "options": {
+      "httpPort": "3001"
+    },
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}

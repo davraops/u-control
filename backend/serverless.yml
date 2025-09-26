@@ -1,0 +1,50 @@
+service: u-control-backend
+
+frameworkVersion: '4'
+
+# Configuración del estado en S3
+configValidationMode: error
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  deploymentBucket:
+    name: ${env:AWS_DEPLOYMENT_BUCKET, 'u-control-906421059987'}
+    serverSideEncryption: AES256
+  environment:
+    STAGE: ${self:provider.stage}
+    PG_HOST: ${env:PG_HOST}
+    PG_PORT: ${env:PG_PORT}
+    PG_DATABASE: ${env:PG_DATABASE}
+    PG_USER: ${env:PG_USER}
+    PG_PASSWORD: ${env:PG_PASSWORD}
+    JWT_SECRET: ${env:JWT_SECRET}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "*"
+
+functions:
+  hello:
+    handler: src/handlers/hello.handler
+    events:
+      - http:
+          path: hello
+          method: get
+          cors: true
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3001
+    host: 0.0.0.0
