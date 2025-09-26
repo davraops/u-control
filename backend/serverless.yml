@@ -2,7 +2,7 @@ service: u-control-backend
 
 frameworkVersion: '4'
 
-# Configuración del estado en S3
+# Serverless Framework Configuration
 configValidationMode: error
 
 provider:
@@ -21,16 +21,8 @@ provider:
     PG_USER: ${env:PG_USER}
     PG_PASSWORD: ${env:PG_PASSWORD}
     JWT_SECRET: ${env:JWT_SECRET}
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: "*"
+  # IAM permissions for external services (PostgreSQL, S3, etc.)
+  # No specific IAM permissions needed for external PostgreSQL database
 
 functions:
   hello:
