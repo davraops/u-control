@@ -1,0 +1,8 @@
+{
+  "IndexDocument": {
+    "Suffix": "u-control/index.html"
+  },
+  "ErrorDocument": {
+    "Key": "u-control/index.html"
+  }
+}
