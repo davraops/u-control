@@ -55,6 +55,176 @@ functions:
         - '!**/*.test.js'
         - '!**/*.spec.js'
 
+  health:
+    handler: src/handlers/health.handler
+    events:
+      - http:
+          path: health
+          method: get
+          cors: true
+      - http:
+          path: health
+          method: options
+          cors: true
+    package:
+      patterns:
+        - '!node_modules/.cache/**'
+        - '!**/__tests__/**'
+        - '!**/*.test.js'
+        - '!**/*.spec.js'
+
+  accounts:
+    handler: src/handlers/accounts.handler
+    events:
+      - http:
+          path: accounts
+          method: get
+          cors: true
+      - http:
+          path: accounts
+          method: post
+          cors: true
+      - http:
+          path: accounts
+          method: options
+          cors: true
+      - http:
+          path: accounts/{id}
+          method: get
+          cors: true
+      - http:
+          path: accounts/{id}
+          method: put
+          cors: true
+      - http:
+          path: accounts/{id}
+          method: delete
+          cors: true
+      - http:
+          path: accounts/{id}
+          method: options
+          cors: true
+    package:
+      patterns:
+        - '!node_modules/.cache/**'
+        - '!**/__tests__/**'
+        - '!**/*.test.js'
+        - '!**/*.spec.js'
+
+  incomes:
+    handler: src/handlers/incomes.handler
+    events:
+      - http:
+          path: incomes
+          method: get
+          cors: true
+      - http:
+          path: incomes
+          method: post
+          cors: true
+      - http:
+          path: incomes
+          method: options
+          cors: true
+      - http:
+          path: incomes/{id}
+          method: get
+          cors: true
+      - http:
+          path: incomes/{id}
+          method: put
+          cors: true
+      - http:
+          path: incomes/{id}
+          method: delete
+          cors: true
+      - http:
+          path: incomes/{id}
+          method: options
+          cors: true
+    package:
+      patterns:
+        - '!node_modules/.cache/**'
+        - '!**/__tests__/**'
+        - '!**/*.test.js'
+        - '!**/*.spec.js'
+
+  budgets:
+    handler: src/handlers/budgets.handler
+    events:
+      - http:
+          path: budgets
+          method: get
+          cors: true
+      - http:
+          path: budgets
+          method: post
+          cors: true
+      - http:
+          path: budgets
+          method: options
+          cors: true
+      - http:
+          path: budgets/{id}
+          method: get
+          cors: true
+      - http:
+          path: budgets/{id}
+          method: put
+          cors: true
+      - http:
+          path: budgets/{id}
+          method: delete
+          cors: true
+      - http:
+          path: budgets/{id}
+          method: options
+          cors: true
+    package:
+      patterns:
+        - '!node_modules/.cache/**'
+        - '!**/__tests__/**'
+        - '!**/*.test.js'
+        - '!**/*.spec.js'
+
+  expenses:
+    handler: src/handlers/expenses.handler
+    events:
+      - http:
+          path: expenses
+          method: get
+          cors: true
+      - http:
+          path: expenses
+          method: post
+          cors: true
+      - http:
+          path: expenses
+          method: options
+          cors: true
+      - http:
+          path: expenses/{id}
+          method: get
+          cors: true
+      - http:
+          path: expenses/{id}
+          method: put
+          cors: true
+      - http:
+          path: expenses/{id}
+          method: delete
+          cors: true
+      - http:
+          path: expenses/{id}
+          method: options
+          cors: true
+    package:
+      patterns:
+        - '!node_modules/.cache/**'
+        - '!**/__tests__/**'
+        - '!**/*.test.js'
+        - '!**/*.spec.js'
+
 plugins:
   - serverless-offline
 

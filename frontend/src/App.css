@@ -1,235 +1,311 @@
-.app {
-  min-height: 100vh;
+/* Material UI Custom Styles */
+.MuiCssBaseline-root {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.app-header {
-  text-align: center;
-  padding: 2rem 1rem;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.app-header h1 {
-  font-size: 3rem;
-  margin: 0;
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom Material UI component overrides */
+.MuiCard-root {
+  animation: fadeInUp 0.6s ease-out;
+  transition: all 0.3s ease;
+}
+
+.MuiCard-root:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.MuiButton-contained {
+  transition: all 0.3s ease;
+}
+
+.MuiButton-contained:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.app-header p {
-  font-size: 1.2rem;
-  margin: 0.5rem 0 0 0;
-  opacity: 0.9;
-}
-
-.app-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-}
-
-.card {
+/* Custom glass effect */
+.glass-effect {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.card h2 {
-  margin: 0 0 1.5rem 0;
-  font-size: 1.5rem;
-  color: #fff;
-}
-
-.fetch-button {
-  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-  border: none;
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
+/* Custom chip styles */
+.MuiChip-root {
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.fetch-button:hover:not(:disabled) {
+.MuiChip-root:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.fetch-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.error {
-  background: rgba(255, 0, 0, 0.1);
-  border: 1px solid rgba(255, 0, 0, 0.3);
-  border-radius: 10px;
-  padding: 1rem;
-  margin-top: 1rem;
-}
-
-.error h3 {
-  margin: 0 0 0.5rem 0;
-  color: #ff6b6b;
-}
-
-.success {
-  background: rgba(0, 255, 0, 0.1);
-  border: 1px solid rgba(0, 255, 0, 0.3);
-  border-radius: 10px;
-  padding: 1rem;
-  margin-top: 1rem;
-}
-
-.success h3 {
-  margin: 0 0 1rem 0;
-  color: #4ecdc4;
-}
-
-.data-grid {
-  display: grid;
-  gap: 0.8rem;
-}
-
-.data-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.status-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.status-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.status-icon {
-  font-size: 1.5rem;
-}
-
-.status-success {
-  color: #4ecdc4;
-  font-weight: bold;
-}
-
-.status-error {
-  color: #ff6b6b;
-  font-weight: bold;
-}
-
-.app-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  background: rgba(0, 0, 0, 0.2);
-  margin-top: 2rem;
-}
-
-.app-footer p {
-  margin: 0;
-  opacity: 0.8;
-}
-
-/* Version Information Styles */
-.version-section {
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.version-section h3 {
-  margin: 0 0 1rem 0;
-  color: #4ecdc4;
-  font-size: 1.2rem;
-}
-
-.version-info {
-  display: grid;
-  gap: 0.8rem;
-}
-
-.version-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.version-badge {
-  background: linear-gradient(45deg, #4ecdc4, #44a08d);
-  color: white;
-  padding: 0.2rem 0.6rem;
+/* Custom alert styles */
+.MuiAlert-root {
   border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.git-commit {
-  background: rgba(0, 0, 0, 0.3);
-  color: #4ecdc4;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
-  border: 1px solid rgba(78, 205, 196, 0.3);
+/* Custom paper styles */
+.MuiPaper-root {
+  transition: all 0.3s ease;
 }
 
-.loading {
-  text-align: center;
-  padding: 1rem;
-  color: #4ecdc4;
-  font-style: italic;
+.MuiPaper-root:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom focus styles */
+.MuiButton-root:focus-visible {
+  outline: 2px solid #4ecdc4;
+  outline-offset: 2px;
+}
+
+.MuiIconButton-root:focus-visible {
+  outline: 2px solid #4ecdc4;
+  outline-offset: 2px;
+}
+
+/* Custom selection styles */
+::selection {
+  background: rgba(78, 205, 196, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(78, 205, 196, 0.3);
+  color: white;
+}
+
+/* Custom loading animation */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .MuiContainer-root {
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  .MuiGrid-container {
+    max-width: 100% !important;
+  }
 }
 
 @media (max-width: 768px) {
-  .app-main {
-    grid-template-columns: 1fr;
-    padding: 1rem;
+  .MuiTypography-h1 {
+    font-size: 2rem !important;
   }
   
-  .app-header h1 {
-    font-size: 2rem;
+  .MuiContainer-root {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
   
-  .data-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .MuiCard-root {
+    margin-bottom: 16px;
   }
   
-  .version-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .MuiStack-root {
+    flex-direction: column !important;
+    align-items: flex-start !important;
   }
+  
+  .MuiGrid-container {
+    flex-direction: column !important;
+  }
+  
+  .MuiGrid-item {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .MuiTypography-h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  .MuiTypography-h2 {
+    font-size: 1.25rem !important;
+  }
+  
+  .MuiTypography-h3 {
+    font-size: 1.1rem !important;
+  }
+  
+  .MuiCard-root {
+    padding: 16px !important;
+  }
+  
+  .MuiButton-root {
+    padding: 8px 16px !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Custom gradient backgrounds */
+.gradient-primary {
+  background: linear-gradient(135deg, #4fc3f7 0%, #ff6b6b 100%);
+}
+
+.gradient-success {
+  background: linear-gradient(135deg, #00d4aa 0%, #4fc3f7 100%);
+}
+
+.gradient-error {
+  background: linear-gradient(135deg, #ff4757 0%, #ff6b6b 100%);
+}
+
+.gradient-warning {
+  background: linear-gradient(135deg, #ffa502 0%, #ff6b6b 100%);
+}
+
+/* Custom shadow effects */
+.shadow-soft {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-medium {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.shadow-strong {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom border radius */
+.rounded-small {
+  border-radius: 8px;
+}
+
+.rounded-medium {
+  border-radius: 12px;
+}
+
+.rounded-large {
+  border-radius: 20px;
+}
+
+/* Custom spacing utilities */
+.spacing-xs {
+  margin: 4px;
+}
+
+.spacing-sm {
+  margin: 8px;
+}
+
+.spacing-md {
+  margin: 16px;
+}
+
+.spacing-lg {
+  margin: 24px;
+}
+
+.spacing-xl {
+  margin: 32px;
+}
+
+/* Custom text utilities */
+.text-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+}
+
+/* Custom opacity utilities */
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-70 {
+  opacity: 0.7;
+}
+
+.opacity-90 {
+  opacity: 0.9;
+}
+
+/* Custom backdrop filter */
+.backdrop-blur {
+  backdrop-filter: blur(10px);
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(5px);
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(20px);
 }
