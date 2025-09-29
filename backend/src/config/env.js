@@ -18,15 +18,15 @@ const config = {
   
   // AWS Configuration
   aws: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID || 'AKIA5GCXHYGJ537CAJE7',
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'K9q7sxcBFRLn85hR0gfv9B8CQkVU9y+ZOzEWXVeA',
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || 'your_aws_access_key_here',
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'your_aws_secret_key_here',
     region: process.env.AWS_DEFAULT_REGION || 'us-east-1',
-    deploymentBucket: process.env.AWS_DEPLOYMENT_BUCKET || 'u-control-906421059987'
+    deploymentBucket: process.env.AWS_DEPLOYMENT_BUCKET || 'your_deployment_bucket_name'
   },
   
   // Serverless Configuration
   serverless: {
-    accessKey: process.env.SERVERLESS_ACCESS_KEY || 'AKOpvaNEvVaOmUieOwQWc9LRWMPcNHc6VlrG6zRqJJytH'
+    accessKey: process.env.SERVERLESS_ACCESS_KEY || 'your_serverless_access_key_here'
   },
   
   // Application Configuration
