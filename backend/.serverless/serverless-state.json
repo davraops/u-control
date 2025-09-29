@@ -64,6 +64,12 @@
               "LogGroupName": "/aws/lambda/u-control-backend-dev-budgets"
             }
           },
+          "CutoffConfigLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/u-control-backend-dev-cutoffConfig"
+            }
+          },
           "ExpensesLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
@@ -153,7 +159,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "u-control-906421059987",
-                "S3Key": "serverless/u-control-backend/dev/1758937427002-2025-09-27T01:43:47.002Z/u-control-backend.zip"
+                "S3Key": "serverless/u-control-backend/dev/1759100404259-2025-09-28T23:00:04.259Z/u-control-backend.zip"
               },
               "Handler": "src/handlers/hello.handler",
               "Runtime": "nodejs18.x",
@@ -187,7 +193,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "u-control-906421059987",
-                "S3Key": "serverless/u-control-backend/dev/1758937427002-2025-09-27T01:43:47.002Z/u-control-backend.zip"
+                "S3Key": "serverless/u-control-backend/dev/1759100404259-2025-09-28T23:00:04.259Z/u-control-backend.zip"
               },
               "Handler": "src/handlers/version.handler",
               "Runtime": "nodejs18.x",
@@ -221,7 +227,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "u-control-906421059987",
-                "S3Key": "serverless/u-control-backend/dev/1758937427002-2025-09-27T01:43:47.002Z/u-control-backend.zip"
+                "S3Key": "serverless/u-control-backend/dev/1759100404259-2025-09-28T23:00:04.259Z/u-control-backend.zip"
               },
               "Handler": "src/handlers/health.handler",
               "Runtime": "nodejs18.x",
@@ -255,7 +261,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "u-control-906421059987",
-                "S3Key": "serverless/u-control-backend/dev/1758937427002-2025-09-27T01:43:47.002Z/u-control-backend.zip"
+                "S3Key": "serverless/u-control-backend/dev/1759100404259-2025-09-28T23:00:04.259Z/u-control-backend.zip"
               },
               "Handler": "src/handlers/accounts.handler",
               "Runtime": "nodejs18.x",
@@ -289,7 +295,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "u-control-906421059987",
-                "S3Key": "serverless/u-control-backend/dev/1758937427002-2025-09-27T01:43:47.002Z/u-control-backend.zip"
+                "S3Key": "serverless/u-control-backend/dev/1759100404259-2025-09-28T23:00:04.259Z/u-control-backend.zip"
               },
               "Handler": "src/handlers/incomes.handler",
               "Runtime": "nodejs18.x",
@@ -323,7 +329,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "u-control-906421059987",
-                "S3Key": "serverless/u-control-backend/dev/1758937427002-2025-09-27T01:43:47.002Z/u-control-backend.zip"
+                "S3Key": "serverless/u-control-backend/dev/1759100404259-2025-09-28T23:00:04.259Z/u-control-backend.zip"
               },
               "Handler": "src/handlers/budgets.handler",
               "Runtime": "nodejs18.x",
@@ -352,12 +358,46 @@
               "BudgetsLogGroup"
             ]
           },
+          "CutoffConfigLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "u-control-906421059987",
+                "S3Key": "serverless/u-control-backend/dev/1759100404259-2025-09-28T23:00:04.259Z/u-control-backend.zip"
+              },
+              "Handler": "src/handlers/cutoffConfig.handler",
+              "Runtime": "nodejs18.x",
+              "FunctionName": "u-control-backend-dev-cutoffConfig",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "STAGE": "dev",
+                  "PG_HOST": "db-dev.tarotencalma.com",
+                  "PG_PORT": "5432",
+                  "PG_DATABASE": "u-control",
+                  "PG_USER": "davra",
+                  "PG_PASSWORD": "123qweZ!",
+                  "JWT_SECRET": "123qweZ!"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CutoffConfigLogGroup"
+            ]
+          },
           "ExpensesLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": "u-control-906421059987",
-                "S3Key": "serverless/u-control-backend/dev/1758937427002-2025-09-27T01:43:47.002Z/u-control-backend.zip"
+                "S3Key": "serverless/u-control-backend/dev/1759100404259-2025-09-28T23:00:04.259Z/u-control-backend.zip"
               },
               "Handler": "src/handlers/expenses.handler",
               "Runtime": "nodejs18.x",
@@ -386,74 +426,84 @@
               "ExpensesLogGroup"
             ]
           },
-          "HelloLambdaVersioniASdjUzemuUcnv63nixbiuvVHsIG8U9TIPOTPuTFDc": {
+          "HelloLambdaVersionktOnA8H52w9NKz3aYw1imyuWEVwzuNMNfQ2f9o9P9M": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "UB+S0PSbiFAIgSPwzTKZunksuwaJlL4hckqRShZCrbA="
+              "CodeSha256": "MFjeluLrrcWlVVhc3Dx9mou+/QPf63wdj1jNnfRr46M="
             }
           },
-          "VersionLambdaVersionIS5m3iOk1XElaSd7yKIZwPqCyAOdsHgoB51AbgbJw0": {
+          "VersionLambdaVersion86WVrKQDvOGxSrjRJdD7ZwuwkkjzclPQApjuXZj4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "VersionLambdaFunction"
               },
-              "CodeSha256": "UB+S0PSbiFAIgSPwzTKZunksuwaJlL4hckqRShZCrbA="
+              "CodeSha256": "MFjeluLrrcWlVVhc3Dx9mou+/QPf63wdj1jNnfRr46M="
             }
           },
-          "HealthLambdaVersionglD6pWkvZSwb6ijWHeCw6z1523yW1cPqes7lVkzvY8": {
+          "HealthLambdaVersionekKSZHuPiWmXZDTwH8qcRbomWgh18qUv87oceimWpM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HealthLambdaFunction"
               },
-              "CodeSha256": "UB+S0PSbiFAIgSPwzTKZunksuwaJlL4hckqRShZCrbA="
+              "CodeSha256": "MFjeluLrrcWlVVhc3Dx9mou+/QPf63wdj1jNnfRr46M="
             }
           },
-          "AccountsLambdaVersionGlCj0HnptaauQmxMCMZTbR60eTkG1EDS4dJDuwTvk": {
+          "AccountsLambdaVersionCKczTY8vQ9PfKkFD85uUdoLR0Rc5Whwq9hx7QpJq0GE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AccountsLambdaFunction"
               },
-              "CodeSha256": "UB+S0PSbiFAIgSPwzTKZunksuwaJlL4hckqRShZCrbA="
+              "CodeSha256": "MFjeluLrrcWlVVhc3Dx9mou+/QPf63wdj1jNnfRr46M="
             }
           },
-          "IncomesLambdaVersionp6cGy79qWK9SLaKGVdHWOrQqXRkDVx0B4zqTPpZY": {
+          "IncomesLambdaVersionLSMnYGgq7bun2vmlcCgJn4eEf5j14ktDqc3G53oEQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "IncomesLambdaFunction"
               },
-              "CodeSha256": "UB+S0PSbiFAIgSPwzTKZunksuwaJlL4hckqRShZCrbA="
+              "CodeSha256": "MFjeluLrrcWlVVhc3Dx9mou+/QPf63wdj1jNnfRr46M="
             }
           },
-          "BudgetsLambdaVersionhJs8iO84h6tc2KLpagcN7g8srCf0eKEghsBnHAQ": {
+          "BudgetsLambdaVersionjqq4FuYswInFq72ZIsO2hBujCfg1GT92YOAEGDio": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "BudgetsLambdaFunction"
               },
-              "CodeSha256": "UB+S0PSbiFAIgSPwzTKZunksuwaJlL4hckqRShZCrbA="
+              "CodeSha256": "MFjeluLrrcWlVVhc3Dx9mou+/QPf63wdj1jNnfRr46M="
             }
           },
-          "ExpensesLambdaVersionPfppxlFLAvRLZfPYczIswiIvkRgNM5MUfuxaWnC7JU": {
+          "CutoffConfigLambdaVersionR8twnwPUaxlkAQ9ri7MbbjGIarsvhDeQ1oacdmXrYU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CutoffConfigLambdaFunction"
+              },
+              "CodeSha256": "MFjeluLrrcWlVVhc3Dx9mou+/QPf63wdj1jNnfRr46M="
+            }
+          },
+          "ExpensesLambdaVersionMJHeOIc7hd6CXjxCDk2W7TeT64MJKguxxnIwBfDhfI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ExpensesLambdaFunction"
               },
-              "CodeSha256": "UB+S0PSbiFAIgSPwzTKZunksuwaJlL4hckqRShZCrbA="
+              "CodeSha256": "MFjeluLrrcWlVVhc3Dx9mou+/QPf63wdj1jNnfRr46M="
             }
           },
           "ApiGatewayRestApi": {
@@ -589,6 +639,21 @@
                 "Ref": "ApiGatewayResourceBudgets"
               },
               "PathPart": "{id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCutoffDashconfig": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "cutoff-config",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -1276,6 +1341,79 @@
             },
             "DependsOn": [
               "BudgetsLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodCutoffDashconfigOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "AWS_PROXY",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,PUT,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ],
+                "IntegrationHttpMethod": "POST",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "CutoffConfigLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCutoffDashconfig"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false
+            },
+            "DependsOn": [
+              "CutoffConfigLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodExpensesOptions": {
@@ -2252,6 +2390,144 @@
               "BudgetsLambdaPermissionApiGateway"
             ]
           },
+          "ApiGatewayMethodCutoffDashconfigGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCutoffDashconfig"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "CutoffConfigLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "CutoffConfigLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodCutoffDashconfigPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCutoffDashconfig"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "CutoffConfigLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "CutoffConfigLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodCutoffDashconfigPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCutoffDashconfig"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "CutoffConfigLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "CutoffConfigLambdaPermissionApiGateway"
+            ]
+          },
           "ApiGatewayMethodExpensesGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -2482,7 +2758,7 @@
               "ExpensesLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1758937420051": {
+          "ApiGatewayDeployment1759100398717": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2500,6 +2776,7 @@
               "ApiGatewayMethodIncomesIdVarOptions",
               "ApiGatewayMethodBudgetsOptions",
               "ApiGatewayMethodBudgetsIdVarOptions",
+              "ApiGatewayMethodCutoffDashconfigOptions",
               "ApiGatewayMethodExpensesOptions",
               "ApiGatewayMethodExpensesIdVarOptions",
               "ApiGatewayMethodHelloGet",
@@ -2529,6 +2806,10 @@
               "ApiGatewayMethodBudgetsIdVarPut",
               "ApiGatewayMethodBudgetsIdVarDelete",
               "ApiGatewayMethodBudgetsIdVarOptions",
+              "ApiGatewayMethodCutoffDashconfigGet",
+              "ApiGatewayMethodCutoffDashconfigPut",
+              "ApiGatewayMethodCutoffDashconfigPost",
+              "ApiGatewayMethodCutoffDashconfigOptions",
               "ApiGatewayMethodExpensesGet",
               "ApiGatewayMethodExpensesPost",
               "ApiGatewayMethodExpensesOptions",
@@ -2760,6 +3041,43 @@
               }
             }
           },
+          "CutoffConfigLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CutoffConfigLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
           "ExpensesLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
@@ -2808,7 +3126,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersioniASdjUzemuUcnv63nixbiuvVHsIG8U9TIPOTPuTFDc"
+              "Ref": "HelloLambdaVersionktOnA8H52w9NKz3aYw1imyuWEVwzuNMNfQ2f9o9P9M"
             },
             "Export": {
               "Name": "sls-u-control-backend-dev-HelloLambdaFunctionQualifiedArn"
@@ -2817,7 +3135,7 @@
           "VersionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "VersionLambdaVersionIS5m3iOk1XElaSd7yKIZwPqCyAOdsHgoB51AbgbJw0"
+              "Ref": "VersionLambdaVersion86WVrKQDvOGxSrjRJdD7ZwuwkkjzclPQApjuXZj4"
             },
             "Export": {
               "Name": "sls-u-control-backend-dev-VersionLambdaFunctionQualifiedArn"
@@ -2826,7 +3144,7 @@
           "HealthLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HealthLambdaVersionglD6pWkvZSwb6ijWHeCw6z1523yW1cPqes7lVkzvY8"
+              "Ref": "HealthLambdaVersionekKSZHuPiWmXZDTwH8qcRbomWgh18qUv87oceimWpM"
             },
             "Export": {
               "Name": "sls-u-control-backend-dev-HealthLambdaFunctionQualifiedArn"
@@ -2835,7 +3153,7 @@
           "AccountsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AccountsLambdaVersionGlCj0HnptaauQmxMCMZTbR60eTkG1EDS4dJDuwTvk"
+              "Ref": "AccountsLambdaVersionCKczTY8vQ9PfKkFD85uUdoLR0Rc5Whwq9hx7QpJq0GE"
             },
             "Export": {
               "Name": "sls-u-control-backend-dev-AccountsLambdaFunctionQualifiedArn"
@@ -2844,7 +3162,7 @@
           "IncomesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "IncomesLambdaVersionp6cGy79qWK9SLaKGVdHWOrQqXRkDVx0B4zqTPpZY"
+              "Ref": "IncomesLambdaVersionLSMnYGgq7bun2vmlcCgJn4eEf5j14ktDqc3G53oEQ"
             },
             "Export": {
               "Name": "sls-u-control-backend-dev-IncomesLambdaFunctionQualifiedArn"
@@ -2853,16 +3171,25 @@
           "BudgetsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "BudgetsLambdaVersionhJs8iO84h6tc2KLpagcN7g8srCf0eKEghsBnHAQ"
+              "Ref": "BudgetsLambdaVersionjqq4FuYswInFq72ZIsO2hBujCfg1GT92YOAEGDio"
             },
             "Export": {
               "Name": "sls-u-control-backend-dev-BudgetsLambdaFunctionQualifiedArn"
             }
           },
+          "CutoffConfigLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CutoffConfigLambdaVersionR8twnwPUaxlkAQ9ri7MbbjGIarsvhDeQ1oacdmXrYU"
+            },
+            "Export": {
+              "Name": "sls-u-control-backend-dev-CutoffConfigLambdaFunctionQualifiedArn"
+            }
+          },
           "ExpensesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ExpensesLambdaVersionPfppxlFLAvRLZfPYczIswiIvkRgNM5MUfuxaWnC7JU"
+              "Ref": "ExpensesLambdaVersionMJHeOIc7hd6CXjxCDk2W7TeT64MJKguxxnIwBfDhfI"
             },
             "Export": {
               "Name": "sls-u-control-backend-dev-ExpensesLambdaFunctionQualifiedArn"
@@ -2967,7 +3294,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersioniASdjUzemuUcnv63nixbiuvVHsIG8U9TIPOTPuTFDc"
+        "versionLogicalId": "HelloLambdaVersionktOnA8H52w9NKz3aYw1imyuWEVwzuNMNfQ2f9o9P9M"
       },
       "version": {
         "handler": "src/handlers/version.handler",
@@ -3034,7 +3361,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "VersionLambdaVersionIS5m3iOk1XElaSd7yKIZwPqCyAOdsHgoB51AbgbJw0"
+        "versionLogicalId": "VersionLambdaVersion86WVrKQDvOGxSrjRJdD7ZwuwkkjzclPQApjuXZj4"
       },
       "health": {
         "handler": "src/handlers/health.handler",
@@ -3101,7 +3428,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "HealthLambdaVersionglD6pWkvZSwb6ijWHeCw6z1523yW1cPqes7lVkzvY8"
+        "versionLogicalId": "HealthLambdaVersionekKSZHuPiWmXZDTwH8qcRbomWgh18qUv87oceimWpM"
       },
       "accounts": {
         "handler": "src/handlers/accounts.handler",
@@ -3288,7 +3615,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "AccountsLambdaVersionGlCj0HnptaauQmxMCMZTbR60eTkG1EDS4dJDuwTvk"
+        "versionLogicalId": "AccountsLambdaVersionCKczTY8vQ9PfKkFD85uUdoLR0Rc5Whwq9hx7QpJq0GE"
       },
       "incomes": {
         "handler": "src/handlers/incomes.handler",
@@ -3475,7 +3802,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "IncomesLambdaVersionp6cGy79qWK9SLaKGVdHWOrQqXRkDVx0B4zqTPpZY"
+        "versionLogicalId": "IncomesLambdaVersionLSMnYGgq7bun2vmlcCgJn4eEf5j14ktDqc3G53oEQ"
       },
       "budgets": {
         "handler": "src/handlers/budgets.handler",
@@ -3649,6 +3976,114 @@
             }
           }
         ],
+        "name": "u-control-backend-dev-budgets",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs18.x",
+        "vpc": {},
+        "versionLogicalId": "BudgetsLambdaVersionjqq4FuYswInFq72ZIsO2hBujCfg1GT92YOAEGDio"
+      },
+      "cutoffConfig": {
+        "handler": "src/handlers/cutoffConfig.handler",
+        "events": [
+          {
+            "http": {
+              "path": "cutoff-config",
+              "method": "get",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "cutoff-config",
+              "method": "put",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "PUT"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "cutoff-config",
+              "method": "post",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "cutoff-config",
+              "method": "options",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "OPTIONS"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
         "package": {
           "patterns": [
             "!node_modules/.cache/**",
@@ -3657,12 +4092,12 @@
             "!**/*.spec.js"
           ]
         },
-        "name": "u-control-backend-dev-budgets",
+        "name": "u-control-backend-dev-cutoffConfig",
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "BudgetsLambdaVersionhJs8iO84h6tc2KLpagcN7g8srCf0eKEghsBnHAQ"
+        "versionLogicalId": "CutoffConfigLambdaVersionR8twnwPUaxlkAQ9ri7MbbjGIarsvhDeQ1oacdmXrYU"
       },
       "expenses": {
         "handler": "src/handlers/expenses.handler",
@@ -3849,7 +4284,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ExpensesLambdaVersionPfppxlFLAvRLZfPYczIswiIvkRgNM5MUfuxaWnC7JU"
+        "versionLogicalId": "ExpensesLambdaVersionMJHeOIc7hd6CXjxCDk2W7TeT64MJKguxxnIwBfDhfI"
       }
     },
     "configValidationMode": "error",
@@ -3891,7 +4326,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/u-control-backend/dev/1758937427002-2025-09-27T01:43:47.002Z",
+    "artifactDirectoryName": "serverless/u-control-backend/dev/1759100404259-2025-09-28T23:00:04.259Z",
     "artifact": "u-control-backend.zip"
   }
 }

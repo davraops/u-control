@@ -74,7 +74,7 @@ functions:
         - '!**/*.spec.js'
 
   accounts:
-    handler: src/handlers/accounts.handler
+    handler: src/handlers/accounts-db.handler
     events:
       - http:
           path: accounts
@@ -112,7 +112,7 @@ functions:
         - '!**/*.spec.js'
 
   incomes:
-    handler: src/handlers/incomes.handler
+    handler: src/handlers/incomes-db.handler
     events:
       - http:
           path: incomes
@@ -150,7 +150,7 @@ functions:
         - '!**/*.spec.js'
 
   budgets:
-    handler: src/handlers/budgets.handler
+    handler: src/handlers/budgets-db.handler
     events:
       - http:
           path: budgets
@@ -180,6 +180,26 @@ functions:
           path: budgets/{id}
           method: options
           cors: true
+
+  cutoffConfig:
+    handler: src/handlers/cutoffConfig.handler
+    events:
+      - http:
+          path: cutoff-config
+          method: get
+          cors: true
+      - http:
+          path: cutoff-config
+          method: put
+          cors: true
+      - http:
+          path: cutoff-config
+          method: post
+          cors: true
+      - http:
+          path: cutoff-config
+          method: options
+          cors: true
     package:
       patterns:
         - '!node_modules/.cache/**'
@@ -188,7 +208,7 @@ functions:
         - '!**/*.spec.js'
 
   expenses:
-    handler: src/handlers/expenses.handler
+    handler: src/handlers/expenses-db.handler
     events:
       - http:
           path: expenses

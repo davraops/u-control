@@ -47,6 +47,24 @@ let accounts = [
     balance: 8000000,
     currency: 'COP',
     tags: ['personal', 'emergencia']
+  }),
+  new Account({
+    name: 'Tarjeta de Crédito',
+    type: 'credit',
+    bank: 'Bancolombia',
+    accountNumber: '****8888',
+    balance: -800000,
+    currency: 'COP',
+    tags: ['personal', 'credito']
+  }),
+  new Account({
+    name: 'Efectivo Empresa',
+    type: 'cash',
+    bank: null,
+    accountNumber: null,
+    balance: 200000,
+    currency: 'COP',
+    tags: ['empresa', 'caja']
   })
 ];
 

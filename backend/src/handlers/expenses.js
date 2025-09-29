@@ -152,9 +152,14 @@ module.exports.handler = async (event, context) => {
       case 'POST':
         // Crear nuevo gasto
         const expenseData = JSON.parse(body || '{}');
+        console.log('Expense data received:', expenseData);
+        
         const newExpense = new Expense(expenseData);
+        console.log('Expense created:', newExpense);
         
         const validation = newExpense.validate();
+        console.log('Validation result:', validation);
+        
         if (!validation.isValid) {
           return {
             statusCode: 400,
