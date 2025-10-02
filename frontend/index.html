@@ -9,94 +9,358 @@
     <link href="styles.css" rel="stylesheet">
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-wallet me-2"></i>U-Control
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <span class="brand-text">U-Control</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-times"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('dashboard')">
-                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('accounts')">
-                            <i class="fas fa-credit-card me-1"></i>Cuentas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('incomes')">
-                            <i class="fas fa-arrow-up me-1"></i>Ingresos
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('expenses')">
-                            <i class="fas fa-arrow-down me-1"></i>Gastos
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('budgets')">
-                            <i class="fas fa-chart-pie me-1"></i>Presupuestos
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('settings')">
-                            <i class="fas fa-cog me-1"></i>Configuración
-                        </a>
-                    </li>
-                </ul>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <!-- Dashboard Principal -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showSection('dashboard')" data-section="dashboard">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span class="nav-text">Inicio</span>
+                    </a>
+                </li>
+
+                <!-- Módulo de Finanzas -->
+                <li class="nav-item has-submenu">
+                    <a class="nav-link submenu-toggle" href="#" onclick="showSection('finances-dashboard')" data-section="finances-dashboard" data-module="finances">
+                        <i class="fas fa-wallet nav-icon"></i>
+                        <span class="nav-text">Finanzas</span>
+                        <i class="fas fa-chevron-down submenu-arrow"></i>
+                    </a>
+                    <ul class="submenu" id="finances-submenu">
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('finances-dashboard')" data-section="finances-dashboard">
+                                <i class="fas fa-chart-line submenu-icon"></i>
+                                <span class="submenu-text">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('accounts')" data-section="accounts">
+                                <i class="fas fa-credit-card submenu-icon"></i>
+                                <span class="submenu-text">Cuentas</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('incomes')" data-section="incomes">
+                                <i class="fas fa-arrow-up submenu-icon"></i>
+                                <span class="submenu-text">Ingresos</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('expenses')" data-section="expenses">
+                                <i class="fas fa-arrow-down submenu-icon"></i>
+                                <span class="submenu-text">Gastos</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('budgets')" data-section="budgets">
+                                <i class="fas fa-chart-pie submenu-icon"></i>
+                                <span class="submenu-text">Presupuestos</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('inflation')" data-section="inflation">
+                                <i class="fas fa-percentage submenu-icon"></i>
+                                <span class="submenu-text">Inflación</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Módulo de Libros -->
+                <li class="nav-item has-submenu">
+                    <a class="nav-link submenu-toggle" href="#" onclick="showSection('books')" data-section="books">
+                        <i class="fas fa-book nav-icon"></i>
+                        <span class="nav-text">Libros</span>
+                        <i class="fas fa-chevron-down submenu-arrow"></i>
+                    </a>
+                    <ul class="submenu" id="books-submenu">
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('books')" data-section="books">
+                                <i class="fas fa-list submenu-icon"></i>
+                                <span class="submenu-text">Mi Biblioteca</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('books-wishlist')" data-section="books-wishlist">
+                                <i class="fas fa-heart submenu-icon"></i>
+                                <span class="submenu-text">Lista de Deseos</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('books-reading')" data-section="books-reading">
+                                <i class="fas fa-book-open submenu-icon"></i>
+                                <span class="submenu-text">Leyendo</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('books-reviews')" data-section="books-reviews">
+                                <i class="fas fa-star submenu-icon"></i>
+                                <span class="submenu-text">Reseñas</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Módulo de Salud (Placeholder) -->
+                <li class="nav-item has-submenu">
+                    <a class="nav-link submenu-toggle" href="#" data-module="health">
+                        <i class="fas fa-heartbeat nav-icon"></i>
+                        <span class="nav-text">Salud</span>
+                        <i class="fas fa-chevron-down submenu-arrow"></i>
+                    </a>
+                    <ul class="submenu" id="health-submenu">
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showComingSoon('health')">
+                                <i class="fas fa-dumbbell submenu-icon"></i>
+                                <span class="submenu-text">Ejercicios</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showComingSoon('health')">
+                                <i class="fas fa-utensils submenu-icon"></i>
+                                <span class="submenu-text">Nutrición</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showComingSoon('health')">
+                                <i class="fas fa-bed submenu-icon"></i>
+                                <span class="submenu-text">Sueño</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Módulo de Productividad (Placeholder) -->
+                <li class="nav-item has-submenu">
+                    <a class="nav-link submenu-toggle" href="#" data-module="productivity">
+                        <i class="fas fa-tasks nav-icon"></i>
+                        <span class="nav-text">Productividad</span>
+                        <i class="fas fa-chevron-down submenu-arrow"></i>
+                    </a>
+                    <ul class="submenu" id="productivity-submenu">
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showComingSoon('productivity')">
+                                <i class="fas fa-list-check submenu-icon"></i>
+                                <span class="submenu-text">Tareas</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showComingSoon('productivity')">
+                                <i class="fas fa-calendar-alt submenu-icon"></i>
+                                <span class="submenu-text">Calendario</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showComingSoon('productivity')">
+                                <i class="fas fa-clock submenu-icon"></i>
+                                <span class="submenu-text">Tiempo</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Módulo de Mis Valores -->
+                <li class="nav-item has-submenu">
+                    <a class="nav-link submenu-toggle" href="#" onclick="showSection('values')" data-section="values">
+                        <i class="fas fa-heart nav-icon"></i>
+                        <span class="nav-text">Mis Valores</span>
+                        <i class="fas fa-chevron-down submenu-arrow"></i>
+                    </a>
+                    <ul class="submenu" id="values-submenu">
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('values')" data-section="values">
+                                <i class="fas fa-star submenu-icon"></i>
+                                <span class="submenu-text">Mis Valores</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('values-goals')" data-section="values-goals">
+                                <i class="fas fa-bullseye submenu-icon"></i>
+                                <span class="submenu-text">Metas Personales</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item">
+                            <a class="submenu-link" href="#" onclick="showSection('values-reflection')" data-section="values-reflection">
+                                <i class="fas fa-lightbulb submenu-icon"></i>
+                                <span class="submenu-text">Reflexiones</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+                <div class="nav-item">
+                    <a class="nav-link" href="#" onclick="showSection('settings')" data-section="settings">
+                        <i class="fas fa-cog nav-icon"></i>
+                        <span class="nav-text">Configuración</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="#" onclick="exportData()">
+                        <i class="fas fa-download nav-icon"></i>
+                        <span class="nav-text">Exportar</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="#" onclick="logout()">
+                        <i class="fas fa-sign-out-alt nav-icon"></i>
+                        <span class="nav-text">Cerrar Sesión</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h4 class="page-title" id="pageTitle">Dashboard</h4>
+        </div>
+        <div class="topbar-right">
+            <button class="theme-toggle" id="themeToggle" title="Cambiar tema">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+            <div class="user-info">
+                <span id="userDisplayName" style="font-weight: bold;">Usuario</span>
             </div>
         </div>
-    </nav>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Main Content -->
-    <div class="container mt-4">
+    <div class="main-content">
+        <div class="container-fluid">
         <!-- Dashboard Section -->
         <div id="dashboard-section" class="content-section">
             <div class="row">
                 <div class="col-12">
-                    <h2><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h2>
-                    <p class="text-muted">Resumen de tu situación financiera</p>
+                    <h2><i class="fas fa-home me-2"></i>Inicio</h2>
+                    <p class="text-muted">Bienvenido a U-Control - Tu centro de control personal</p>
                 </div>
             </div>
             
-            <!-- Period Info -->
-            <div id="period-info" class="row mb-4">
-                <!-- This will be populated by JavaScript -->
-            </div>
-            
-            <!-- Period Selector -->
+            <!-- Cryptocurrency Quotes -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <div class="card">
+                    <h3><i class="fas fa-coins me-2"></i>Cotizaciones de Criptomonedas</h3>
+                    <p class="text-muted">Precios actuales de las principales criptomonedas</p>
+                </div>
+            </div>
+            
+            <div class="row mb-4" id="crypto-quotes">
+                <!-- USD/COP Quote -->
+                <div class="col-md-4 mb-3">
+                    <div class="card quote-card">
                         <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <h5 class="card-title mb-0">
-                                        <i class="fas fa-calendar-alt me-2"></i>Período Financiero
-                                    </h5>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <h5 class="card-title mb-1">USD/COP</h5>
+                                    <p class="card-text text-muted mb-0">Dólar Estadounidense</p>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="d-flex justify-content-end">
-                                        <button class="btn btn-outline-secondary btn-sm me-2" onclick="goToPreviousPeriod()" title="Período anterior">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </button>
-                                        <select id="period-selector" class="form-select form-select-sm" style="width: auto;" onchange="changePeriod()">
-                                            <!-- Options will be populated by JavaScript -->
-                                        </select>
-                                        <button class="btn btn-outline-secondary btn-sm ms-2" onclick="goToNextPeriod()" title="Período siguiente">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </button>
-                                        <button class="btn btn-primary btn-sm ms-2" onclick="goToCurrentPeriod()" title="Ir al período actual">
-                                            <i class="fas fa-home"></i> Actual
-                                        </button>
-                                    </div>
+                                <div class="text-end">
+                                    <h4 class="mb-1" id="usd-cop-price">$0.00</h4>
+                                    <small class="text-muted" id="usd-cop-change">Tasa de cambio</small>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <small class="text-muted d-block">7d</small>
+                                    <small id="usd-cop-change-7d" class="fw-bold">-</small>
+                                </div>
+                                <div class="col-4">
+                                    <small class="text-muted d-block">30d</small>
+                                    <small id="usd-cop-change-30d" class="fw-bold">-</small>
+                                </div>
+                                <div class="col-4">
+                                    <small class="text-muted d-block">1y</small>
+                                    <small id="usd-cop-change-1y" class="fw-bold">-</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- BTC Quote -->
+                <div class="col-md-4 mb-3">
+                    <div class="card quote-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <h5 class="card-title mb-1">₿ BTC</h5>
+                                    <p class="card-text text-muted mb-0">Bitcoin</p>
+                                </div>
+                                <div class="text-end">
+                                    <h4 class="mb-1" id="btc-price">$0.00</h4>
+                                    <small class="text-muted" id="btc-change">0.00%</small>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <small class="text-muted d-block">7d</small>
+                                    <small id="btc-change-7d" class="fw-bold">0.00%</small>
+                                </div>
+                                <div class="col-4">
+                                    <small class="text-muted d-block">30d</small>
+                                    <small id="btc-change-30d" class="fw-bold">0.00%</small>
+                                </div>
+                                <div class="col-4">
+                                    <small class="text-muted d-block">1y</small>
+                                    <small id="btc-change-1y" class="fw-bold">0.00%</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- QRL Quote -->
+                <div class="col-md-4 mb-3">
+                    <div class="card quote-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <h5 class="card-title mb-1">🪙 QRL</h5>
+                                    <p class="card-text text-muted mb-0">Quantum Resistant Ledger</p>
+                                </div>
+                                <div class="text-end">
+                                    <h4 class="mb-1" id="qrl-price">$0.00</h4>
+                                    <small class="text-muted" id="qrl-change">0.00%</small>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <small class="text-muted d-block">7d</small>
+                                    <small id="qrl-change-7d" class="fw-bold">0.00%</small>
+                                </div>
+                                <div class="col-4">
+                                    <small class="text-muted d-block">30d</small>
+                                    <small id="qrl-change-30d" class="fw-bold">0.00%</small>
+                                </div>
+                                <div class="col-4">
+                                    <small class="text-muted d-block">1y</small>
+                                    <small id="qrl-change-1y" class="fw-bold">0.00%</small>
                                 </div>
                             </div>
                         </div>
@@ -104,82 +368,158 @@
                 </div>
             </div>
             
+            <!-- Welcome Cards -->
             <div class="row mb-4">
-                <div class="col-md-3">
-                    <div class="card text-white bg-success">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h4 class="card-title">Total Ingresos</h4>
-                                    <h3 id="total-incomes">$0</h3>
-                                </div>
-                                <i class="fas fa-arrow-up fa-2x"></i>
+                <div class="col-md-4 mb-3">
+                    <div class="card module-card">
+                        <div class="card-body text-center">
+                            <div class="module-icon">
+                                <i class="fas fa-chart-line"></i>
                             </div>
+                            <h5 class="card-title">Finanzas</h5>
+                            <p class="card-text">Gestiona tus ingresos, gastos, cuentas y presupuestos</p>
+                            <a href="#" class="btn btn-primary" onclick="showSection('finances-dashboard')">Ir a Finanzas</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-danger">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h4 class="card-title">Total Gastos</h4>
-                                    <h3 id="total-expenses">$0</h3>
-                                </div>
-                                <i class="fas fa-arrow-down fa-2x"></i>
+                <div class="col-md-4 mb-3">
+                    <div class="card module-card">
+                        <div class="card-body text-center">
+                            <div class="module-icon">
+                                <i class="fas fa-book"></i>
                             </div>
+                            <h5 class="card-title">Libros</h5>
+                            <p class="card-text">Organiza tu biblioteca personal, reseñas y listas de lectura</p>
+                            <a href="#" class="btn btn-info" onclick="showSection('books')">Ir a Libros</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-info">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h4 class="card-title">Balance</h4>
-                                    <h3 id="balance">$0</h3>
-                                </div>
-                                <i class="fas fa-balance-scale fa-2x"></i>
+                <div class="col-md-4 mb-3">
+                    <div class="card module-card">
+                        <div class="card-body text-center">
+                            <div class="module-icon">
+                                <i class="fas fa-heartbeat"></i>
                             </div>
+                            <h5 class="card-title">Salud</h5>
+                            <p class="card-text">Ejercicios, nutrición y seguimiento del sueño</p>
+                            <button class="btn btn-outline-secondary" onclick="showComingSoon('health')">Próximamente</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-warning">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h4 class="card-title">Cuentas</h4>
-                                    <h3 id="total-accounts">0</h3>
-                                </div>
-                                <i class="fas fa-credit-card fa-2x"></i>
+                <div class="col-md-4 mb-3">
+                    <div class="card module-card">
+                        <div class="card-body text-center">
+                            <div class="module-icon">
+                                <i class="fas fa-tasks"></i>
                             </div>
+                            <h5 class="card-title">Productividad</h5>
+                            <p class="card-text">Tareas, calendario y gestión del tiempo</p>
+                            <button class="btn btn-outline-secondary" onclick="showComingSoon('productivity')">Próximamente</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card module-card">
+                        <div class="card-body text-center">
+                            <div class="module-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h5 class="card-title">Mis Valores</h5>
+                            <p class="card-text">Define tus valores, metas personales y reflexiones</p>
+                            <a href="#" class="btn btn-success" onclick="showSection('values')">Ir a Mis Valores</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Mis Valores Section -->
+        <div id="values-section" class="content-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2><i class="fas fa-heart me-2"></i>Mis Valores</h2>
+                            <p class="text-muted">Define y gestiona tus valores personales</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row mt-4">
+                <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h5><i class="fas fa-chart-line me-2"></i>Últimos Ingresos</h5>
-                        </div>
                         <div class="card-body">
-                            <div id="recent-incomes">
-                                <p class="text-muted">Cargando...</p>
+                            <h5 class="card-title">
+                                <i class="fas fa-star me-2"></i>Valores Personales
+                            </h5>
+                            <p class="card-text">Identifica y prioriza los valores que guían tu vida.</p>
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Esta sección está en desarrollo. Próximamente podrás definir tus valores personales, establecer metas basadas en ellos y realizar reflexiones periódicas.
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5><i class="fas fa-chart-line me-2"></i>Últimos Gastos</h5>
+            </div>
+        </div>
+
+        <!-- Metas Personales Section -->
+        <div id="values-goals-section" class="content-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2><i class="fas fa-bullseye me-2"></i>Metas Personales</h2>
+                            <p class="text-muted">Establece y sigue el progreso de tus metas personales</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
                         <div class="card-body">
-                            <div id="recent-expenses">
-                                <p class="text-muted">Cargando...</p>
+                            <h5 class="card-title">
+                                <i class="fas fa-target me-2"></i>Mis Metas
+                            </h5>
+                            <p class="card-text">Crea metas alineadas con tus valores personales.</p>
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Esta sección está en desarrollo. Próximamente podrás crear, gestionar y hacer seguimiento a tus metas personales.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reflexiones Section -->
+        <div id="values-reflection-section" class="content-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2><i class="fas fa-lightbulb me-2"></i>Reflexiones</h2>
+                            <p class="text-muted">Registra tus pensamientos y reflexiones personales</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-journal-whills me-2"></i>Mi Diario de Reflexiones
+                            </h5>
+                            <p class="card-text">Documenta tus reflexiones y aprendizajes personales.</p>
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Esta sección está en desarrollo. Próximamente podrás escribir y organizar tus reflexiones personales.
                             </div>
                         </div>
                     </div>
@@ -191,10 +531,23 @@
         <div id="accounts-section" class="content-section" style="display: none;">
             <div class="row">
                 <div class="col-12">
-                    <h2><i class="fas fa-credit-card me-2"></i>Cuentas</h2>
-                    <p class="text-muted">Gestiona tus cuentas bancarias y efectivo</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2><i class="fas fa-credit-card me-2"></i>Cuentas</h2>
+                            <p class="text-muted">Gestiona tus cuentas bancarias y efectivo</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <label class="form-check-label me-2" for="toggleValuesAccounts">
+                                <i class="fas fa-eye me-1"></i>Mostrar valores
+                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="toggleValuesAccounts" checked onchange="toggleFinancialValues(event)">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             
             <div class="row mb-3">
                 <div class="col-12">
@@ -221,10 +574,23 @@
         <div id="incomes-section" class="content-section" style="display: none;">
             <div class="row">
                 <div class="col-12">
-                    <h2><i class="fas fa-arrow-up me-2"></i>Ingresos</h2>
-                    <p class="text-muted">Registra y gestiona tus ingresos</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2><i class="fas fa-arrow-up me-2"></i>Ingresos</h2>
+                            <p class="text-muted">Registra y gestiona tus ingresos</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <label class="form-check-label me-2" for="toggleValuesIncomes">
+                                <i class="fas fa-eye me-1"></i>Mostrar valores
+                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="toggleValuesIncomes" checked onchange="toggleFinancialValues(event)">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             
             <!-- Period Selector for Incomes -->
             <div class="row mb-4">
@@ -232,24 +598,18 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <h5 class="card-title mb-0">
+                                <div class="col-12 col-md-6 mb-3 mb-md-0">
+                                    <h5 class="card-title mb-0 text-center text-md-start">
                                         <i class="fas fa-calendar-alt me-2"></i>Período Financiero
                                     </h5>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="d-flex justify-content-end">
-                                        <button class="btn btn-outline-secondary btn-sm me-2" onclick="goToPreviousPeriod()" title="Período anterior">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </button>
-                                        <select id="incomes-period-selector" class="form-select form-select-sm" style="width: auto;" onchange="changePeriod()">
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex justify-content-center justify-content-md-end gap-2 align-items-center">
+                                        <select id="incomes-period-selector" class="form-select form-select-sm" style="min-width: 180px; max-width: 200px;" onchange="changePeriod()">
                                             <!-- Options will be populated by JavaScript -->
                                         </select>
-                                        <button class="btn btn-outline-secondary btn-sm ms-2" onclick="goToNextPeriod()" title="Período siguiente">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </button>
-                                        <button class="btn btn-primary btn-sm ms-2" onclick="goToCurrentPeriod()" title="Ir al período actual">
-                                            <i class="fas fa-home"></i> Actual
+                                        <button class="btn btn-primary btn-sm" onclick="goToCurrentPeriod()" title="Ir al período actual">
+                                            <i class="fas fa-home"></i> <span class="d-none d-sm-inline">Actual</span>
                                         </button>
                                     </div>
                                 </div>
@@ -284,56 +644,59 @@
         <div id="expenses-section" class="content-section" style="display: none;">
             <div class="row">
                 <div class="col-12">
-                    <h2><i class="fas fa-arrow-down me-2"></i>Gastos</h2>
-                    <p class="text-muted">Registra y gestiona tus gastos</p>
-                </div>
-            </div>
-            
-            <!-- Period Selector for Expenses -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <h5 class="card-title mb-0">
-                                        <i class="fas fa-calendar-alt me-2"></i>Período Financiero
-                                    </h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="d-flex justify-content-end">
-                                        <button class="btn btn-outline-secondary btn-sm me-2" onclick="goToPreviousPeriod()" title="Período anterior">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </button>
-                                        <select id="expenses-period-selector" class="form-select form-select-sm" style="width: auto;" onchange="changePeriod()">
-                                            <!-- Options will be populated by JavaScript -->
-                                        </select>
-                                        <button class="btn btn-outline-secondary btn-sm ms-2" onclick="goToNextPeriod()" title="Período siguiente">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </button>
-                                        <button class="btn btn-primary btn-sm ms-2" onclick="goToCurrentPeriod()" title="Ir al período actual">
-                                            <i class="fas fa-home"></i> Actual
-                                        </button>
-                                    </div>
-                                </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2><i class="fas fa-arrow-down me-2"></i>Gastos</h2>
+                            <p class="text-muted">Registra y gestiona tus gastos</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <label class="form-check-label me-2" for="toggleValuesExpenses">
+                                <i class="fas fa-eye me-1"></i>Mostrar valores
+                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="toggleValuesExpenses" checked onchange="toggleFinancialValues(event)">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             
-            <!-- Budget Filter -->
-            <div class="row mb-3">
-                <div class="col-md-6">
+            <!-- Period Selector and Budget Filter for Expenses -->
+            <div class="row mb-4">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <label for="expenseBudgetFilter" class="form-label me-3 mb-0">
-                                    <i class="fas fa-filter me-1"></i>Filtrar por presupuesto:
-                                </label>
-                                <select id="expenseBudgetFilter" class="form-select" onchange="filterExpensesByBudget()">
-                                    <option value="">Todos los presupuestos</option>
-                                </select>
+                            <div class="row align-items-center">
+                                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                                    <h5 class="card-title mb-0 text-center text-lg-start">
+                                        <i class="fas fa-calendar-alt me-2"></i>Período Financiero
+                                    </h5>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="d-flex justify-content-center justify-content-lg-end gap-2 align-items-center">
+                                        <select id="expenses-period-selector" class="form-select form-select-sm" style="min-width: 180px; max-width: 200px;" onchange="changePeriod()">
+                                            <!-- Options will be populated by JavaScript -->
+                                        </select>
+                                        <button class="btn btn-primary btn-sm" onclick="goToCurrentPeriod()" title="Ir al período actual">
+                                            <i class="fas fa-home"></i> <span class="d-none d-sm-inline">Actual</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-3">
+                                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                                    <h6 class="card-title mb-0 text-center text-lg-start">
+                                        <i class="fas fa-filter me-2"></i>Filtrar por Presupuesto
+                                    </h6>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="d-flex justify-content-center justify-content-lg-end">
+                                        <select id="expenseBudgetFilter" class="form-select form-select-sm" style="min-width: 200px;" onchange="filterExpensesByBudget()">
+                                            <option value="">Todos los presupuestos</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -365,10 +728,23 @@
         <div id="budgets-section" class="content-section" style="display: none;">
             <div class="row">
                 <div class="col-12">
-                    <h2><i class="fas fa-chart-pie me-2"></i>Presupuestos</h2>
-                    <p class="text-muted">Crea y gestiona tus presupuestos</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2><i class="fas fa-chart-pie me-2"></i>Presupuestos</h2>
+                            <p class="text-muted">Crea y gestiona tus presupuestos</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <label class="form-check-label me-2" for="toggleValuesBudgets">
+                                <i class="fas fa-eye me-1"></i>Mostrar valores
+                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="toggleValuesBudgets" checked onchange="toggleFinancialValues(event)">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             
             <div class="row mb-3">
                 <div class="col-12">
@@ -384,6 +760,461 @@
                         <div class="card-body">
                             <div id="budgets-list">
                                 <p class="text-muted">Cargando presupuestos...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inflation Section -->
+        <div id="inflation-section" class="content-section inflation-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2><i class="fas fa-percentage me-2"></i>Indicadores de Inflación</h2>
+                            <p class="text-muted">Monitorea la inflación y el poder adquisitivo de tu dinero</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-primary" onclick="refreshInflationData()">
+                                <i class="fas fa-sync-alt"></i> Actualizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Inflation Rates -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card inflation-card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-flag me-2"></i>Colombia</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <h3 class="text-danger mb-1" id="col-inflation-rate">-</h3>
+                                        <small class="text-muted">Inflación Anual</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <h3 class="text-primary mb-1" id="col-cpi-index">-</h3>
+                                        <small class="text-muted">IPC (Base 2018)</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <small class="text-muted">Última actualización: <span id="col-last-update">-</span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card inflation-card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-flag-usa me-2"></i>Estados Unidos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <h3 class="text-success mb-1" id="usa-inflation-rate">-</h3>
+                                        <small class="text-muted">Inflación Anual</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <h3 class="text-primary mb-1" id="usa-cpi-index">-</h3>
+                                        <small class="text-muted">CPI (Base 1982)</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <small class="text-muted">Última actualización: <span id="usa-last-update">-</span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purchasing Power Calculator -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card inflation-card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-calculator me-2"></i>Calculadora de Poder Adquisitivo</h5>
+                        </div>
+                        <div class="card-body purchasing-power-calculator">
+                            <p class="text-muted">Calcula cuánto poder adquisitivo has perdido debido a la inflación</p>
+                            
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="form-label">País</label>
+                                    <select class="form-select" id="purchasing-power-country">
+                                        <option value="COL">Colombia (COP)</option>
+                                        <option value="USA">Estados Unidos (USD)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Fecha Base</label>
+                                    <input type="date" class="form-control" id="purchasing-power-base-date" value="2000-01-01">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Fecha Comparación</label>
+                                    <input type="date" class="form-control" id="purchasing-power-comparison-date">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Cantidad</label>
+                                    <input type="number" class="form-control" id="purchasing-power-amount" placeholder="1000000" value="1000000">
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <button class="btn btn-primary" onclick="calculatePurchasingPower()">
+                                        <i class="fas fa-calculator"></i> Calcular
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div id="purchasing-power-results" class="mt-4 purchasing-power-results" style="display: none;">
+                                <div class="alert alert-info">
+                                    <h6><i class="fas fa-info-circle me-2"></i>Resultados del Cálculo</h6>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <strong>Valor Original:</strong><br>
+                                            <span id="pp-original-amount" class="h5 text-primary">-</span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <strong>Poder Adquisitivo Actual:</strong><br>
+                                            <span id="pp-current-value" class="h5 text-success">-</span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <strong>Pérdida por Inflación:</strong><br>
+                                            <span id="pp-loss-percentage" class="h5 text-danger">-</span><br>
+                                            <small class="text-muted">(<span id="pp-loss-amount">-</span>)</small>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <strong>Inflación Acumulada:</strong> <span id="pp-cumulative-inflation" class="text-warning">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Explicación de la inflación acumulada -->
+                                <div id="inflation-explanation"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Depreciation Calculator -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card inflation-card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-calculator me-2"></i>Calculadora de Depreciación Anual</h5>
+                        </div>
+                        <div class="card-body depreciation-calculator">
+                            <p class="text-muted mb-4">
+                                Proyecta tu balance actual al próximo año considerando la inflación y el impacto en tu poder adquisitivo.
+                            </p>
+                            
+                            <!-- Motivational Quote -->
+                            <div class="alert alert-warning border-warning mb-4">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-quote-left text-warning me-3 fs-4"></i>
+                                    <div>
+                                        <strong class="text-dark">"No seas esclavo de grilletes dorados"</strong>
+                                        <br>
+                                        <small class="text-muted">
+                                            La verdadera riqueza no está en acumular dinero, sino en la libertad de elegir cómo vivir tu vida. 
+                                            Usa este calculador para entender el impacto de la inflación y toma decisiones que te acerquen a la libertad financiera.
+                                        </small>
+                                    </div>
+                                    <i class="fas fa-quote-right text-warning ms-3 fs-4"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Login Section -->
+                            <div id="quick-login-section" class="alert alert-info mb-4" style="display: none;">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <i class="fas fa-sign-in-alt me-2"></i>
+                                        <strong>Inicia sesión para cargar tu balance automáticamente</strong>
+                                        <br>
+                                        <small class="text-muted">Tu sesión ha expirado. Haz login para usar todas las funciones.</small>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm" onclick="showQuickLogin()">
+                                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Login Form -->
+                            <div id="quick-login-form" class="alert alert-light mb-4" style="display: none;">
+                                <h6><i class="fas fa-sign-in-alt me-2"></i>Inicio de Sesión Rápido</h6>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="quick-username" placeholder="Usuario" value="rafael">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="password" class="form-control" id="quick-password" placeholder="Contraseña" value="123qweZ!">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-success btn-sm" onclick="quickLogin()">
+                                            <i class="fas fa-sign-in-alt"></i> Login
+                                        </button>
+                                        <button class="btn btn-secondary btn-sm ms-2" onclick="hideQuickLogin()">
+                                            <i class="fas fa-times"></i> Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="depreciation-country" class="form-label">País</label>
+                                    <select class="form-select" id="depreciation-country" onchange="updateDepreciationCurrency()">
+                                        <option value="COL">Colombia</option>
+                                        <option value="USA">Estados Unidos</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="depreciation-balance" class="form-label">Balance Actual</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="depreciation-currency">COP</span>
+                                        <input type="number" class="form-control" id="depreciation-balance" 
+                                               placeholder="1000000" min="0" step="1000">
+                                        <button class="btn btn-outline-primary" type="button" onclick="loadTotalBalance()" 
+                                                title="Cargar balance total de mis cuentas">
+                                            <i class="fas fa-calculator"></i>
+                                        </button>
+                                    </div>
+                                    <small class="text-muted">Usa el botón <i class="fas fa-calculator"></i> para cargar tu balance total</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="depreciation-period" class="form-label">Período de Proyección</label>
+                                    <select class="form-select" id="depreciation-period">
+                                        <option value="1">1 año</option>
+                                        <option value="2">2 años</option>
+                                        <option value="3">3 años</option>
+                                        <option value="5">5 años</option>
+                                        <option value="10">10 años</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="depreciation-inflation-rate" class="form-label">Tasa de Inflación Anual</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="depreciation-inflation-rate" 
+                                               placeholder="5.1" min="0" max="100" step="0.1">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                    <small class="text-muted">Deja vacío para usar la tasa actual del país</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="depreciation-growth-rate" class="form-label">Tasa de Crecimiento de Ingresos</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="depreciation-growth-rate" 
+                                               placeholder="0" min="0" max="100" step="0.1">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                    <small class="text-muted">Crecimiento esperado de tus ingresos anuales</small>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button class="btn btn-primary btn-lg" onclick="calculateDepreciation()">
+                                    <i class="fas fa-chart-line"></i> Calcular Proyección
+                                </button>
+                            </div>
+                            
+                            <div id="depreciation-results" class="mt-4 depreciation-results" style="display: none;">
+                                <div class="alert alert-info">
+                                    <h6><i class="fas fa-chart-line me-2"></i>Proyección de Depreciación</h6>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <strong>Balance Actual:</strong><br>
+                                            <span id="dep-current-balance" class="h5 text-primary">-</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>Balance Proyectado:</strong><br>
+                                            <span id="dep-projected-balance" class="h5 text-primary">-</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>Pérdida por Inflación:</strong><br>
+                                            <span id="dep-inflation-loss" class="h5 text-danger">-</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>Poder Adquisitivo:</strong><br>
+                                            <span id="dep-purchasing-power" class="h5 text-warning">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Proyección detallada por año -->
+                                <div id="depreciation-detailed-results"></div>
+                                
+                                <!-- Explicación de la depreciación -->
+                                <div id="depreciation-explanation"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inflation Insights -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card inflation-card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-lightbulb me-2"></i>Análisis e Insights</h5>
+                        </div>
+                        <div class="card-body inflation-insights">
+                            <div id="inflation-insights">
+                                <p class="text-muted">Cargando análisis...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Section -->
+        <div id="books-section" class="content-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h2><i class="fas fa-book me-2"></i>Mi Biblioteca</h2>
+                    <p class="text-muted">Organiza tu colección de libros y reseñas</p>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-bolt me-2"></i>Acciones Rápidas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-primary w-100 mb-2" onclick="showAddBookModal()">
+                                        <i class="fas fa-plus me-2"></i>Agregar Libro
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-info w-100 mb-2" onclick="showSection('books-wishlist')">
+                                        <i class="fas fa-heart me-2"></i>Lista de Deseos
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-success w-100 mb-2" onclick="showSection('books-reading')">
+                                        <i class="fas fa-book-open me-2"></i>Leyendo
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-warning w-100 mb-2" onclick="showSection('books-reviews')">
+                                        <i class="fas fa-star me-2"></i>Reseñas
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Books List -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5><i class="fas fa-list me-2"></i>Mis Libros</h5>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-sm btn-outline-secondary" onclick="filterBooks('all')">Todos</button>
+                                <button class="btn btn-sm btn-outline-primary" onclick="filterBooks('read')">Leídos</button>
+                                <button class="btn btn-sm btn-outline-success" onclick="filterBooks('reading')">Leyendo</button>
+                                <button class="btn btn-sm btn-outline-warning" onclick="filterBooks('want')">Quiero Leer</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="books-list">
+                                <p class="text-muted">Cargando libros...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Wishlist Section -->
+        <div id="books-wishlist-section" class="content-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h2><i class="fas fa-heart me-2"></i>Lista de Deseos</h2>
+                    <p class="text-muted">Libros que quieres leer</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="wishlist-list">
+                                <p class="text-muted">No hay libros en tu lista de deseos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Reading Section -->
+        <div id="books-reading-section" class="content-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h2><i class="fas fa-book-open me-2"></i>Leyendo</h2>
+                    <p class="text-muted">Libros que estás leyendo actualmente</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="reading-list">
+                                <p class="text-muted">No estás leyendo ningún libro actualmente</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Reviews Section -->
+        <div id="books-reviews-section" class="content-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h2><i class="fas fa-star me-2"></i>Reseñas</h2>
+                    <p class="text-muted">Tus reseñas y calificaciones de libros</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="reviews-list">
+                                <p class="text-muted">No has escrito ninguna reseña</p>
                             </div>
                         </div>
                     </div>
@@ -455,6 +1286,204 @@
                 </div>
             </div>
         </div>
+
+        <!-- Finances Dashboard Section -->
+        <div id="finances-dashboard-section" class="content-section" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2><i class="fas fa-chart-line me-2"></i>Dashboard Financiero</h2>
+                            <p class="text-muted">Resumen completo de tu situación financiera</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-sm btn-outline-success me-2" onclick="reloadDashboard()" title="Recargar todos los datos">
+                                <i class="fas fa-sync-alt me-1"></i>Recargar
+                            </button>
+                            <label class="form-check-label me-2" for="toggleValues">
+                                <i class="fas fa-eye me-1"></i>Mostrar valores
+                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="toggleValues" checked onchange="toggleFinancialValues(event)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-bolt me-2"></i>Acciones Rápidas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-primary w-100 mb-2" onclick="showSection('incomes')">
+                                        <i class="fas fa-plus me-2"></i>Agregar Ingreso
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-danger w-100 mb-2" onclick="showSection('expenses')">
+                                        <i class="fas fa-plus me-2"></i>Agregar Gasto
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-success w-100 mb-2" onclick="showSection('budgets')">
+                                        <i class="fas fa-chart-pie me-2"></i>Ver Presupuestos
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-info w-100 mb-2" onclick="showSection('accounts')">
+                                        <i class="fas fa-credit-card me-2"></i>Ver Cuentas
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Overview Cards -->
+            <div class="row mb-4">
+                <div class="col-md-3 mb-3">
+                    <div class="card finance-metric-card">
+                        <div class="card-body">
+                            <div class="metric-icon income">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h6 class="metric-label">Ingresos del Mes</h6>
+                                <h4 class="metric-value" id="monthly-income">$0</h4>
+                                <small class="metric-change positive" id="income-change">+0%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card finance-metric-card">
+                        <div class="card-body">
+                            <div class="metric-icon expense">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h6 class="metric-label">Gastos del Mes</h6>
+                                <h4 class="metric-value" id="monthly-expense">$0</h4>
+                                <small class="metric-change negative" id="expense-change">+0%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card finance-metric-card">
+                        <div class="card-body">
+                            <div class="metric-icon balance">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h6 class="metric-label">Balance Neto</h6>
+                                <h4 class="metric-value" id="net-balance">$0</h4>
+                                <small class="metric-change" id="balance-change">+0%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card finance-metric-card">
+                        <div class="card-body">
+                            <div class="metric-icon budget">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h6 class="metric-label">Presupuesto Usado</h6>
+                                <h4 class="metric-value" id="budget-used">0%</h4>
+                                <small class="metric-change" id="budget-remaining">$0 restante</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Active Budgets Summary -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5><i class="fas fa-chart-pie me-2"></i>Presupuestos Activos</h5>
+                            <a href="#" class="btn btn-sm btn-outline-primary" onclick="showSection('budgets')">Ver Todos</a>
+                        </div>
+                        <div class="card-body">
+                            <div id="active-budgets-summary">
+                                <p class="text-muted">Cargando presupuestos...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts and Analysis -->
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-chart-bar me-2"></i>Gastos por Categoría</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="expenses-chart" class="chart-container">
+                                <canvas id="expensesChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-credit-card me-2"></i>Resumen de Cuentas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="accounts-summary">
+                                <p class="text-muted">Cargando cuentas...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5><i class="fas fa-arrow-up me-2"></i>Últimos Ingresos</h5>
+                            <a href="#" class="btn btn-sm btn-outline-primary" onclick="showSection('incomes')">Ver Todos</a>
+                        </div>
+                        <div class="card-body">
+                            <div id="recent-incomes">
+                                <p class="text-muted">Cargando ingresos...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5><i class="fas fa-arrow-down me-2"></i>Últimos Gastos</h5>
+                            <a href="#" class="btn btn-sm btn-outline-primary" onclick="showSection('expenses')">Ver Todos</a>
+                        </div>
+                        <div class="card-body">
+                            <div id="recent-expenses">
+                                <p class="text-muted">Cargando gastos...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
     </div>
 
     <!-- Modals -->
@@ -462,8 +1491,27 @@
         <!-- Modals will be loaded here -->
     </div>
 
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="api-config.js"></script>
+    <script src="api-service.js"></script>
     <script src="app.js"></script>
+    <script>
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Initialize the app
+            if (typeof initializeApp === 'function') {
+                initializeApp();
+            }
+        });
+    </script>
   </body>
 </html>
+

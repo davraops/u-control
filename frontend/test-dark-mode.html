@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Modo Oscuro - U-Control</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        [data-theme="dark"] body {
+            background-color: #1a202c;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+        
+        [data-theme="dark"] .test-section {
+            border-color: #4a5568;
+            background-color: #2d3748;
+        }
+        
+        .test-title {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+        
+        [data-theme="dark"] .test-title {
+            color: #e2e8f0;
+        }
+        
+        /* Debug styles - force dark mode for table */
+        [data-theme="dark"] .alert-light .table.table-sm {
+            background-color: #2d3748 !important;
+            color: #e2e8f0 !important;
+        }
+        
+        [data-theme="dark"] .alert-light .table.table-sm th {
+            background-color: #4a5568 !important;
+            color: #f7fafc !important;
+            border-color: #718096 !important;
+        }
+        
+        [data-theme="dark"] .alert-light .table.table-sm td {
+            background-color: #2d3748 !important;
+            color: #e2e8f0 !important;
+            border-color: #4a5568 !important;
+        }
+        
+        [data-theme="dark"] .alert-light .table.table-sm tbody tr {
+            background-color: #2d3748 !important;
+        }
+        
+        [data-theme="dark"] .alert-light .table.table-sm tbody tr td {
+            background-color: #2d3748 !important;
+            color: #e2e8f0 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">
+            <i class="fas fa-moon me-2"></i>Test de Modo Oscuro
+            <button class="btn btn-outline-secondary ms-3" onclick="toggleDarkMode()">
+                <i class="fas fa-toggle-off" id="dark-mode-icon"></i> Cambiar Tema
+            </button>
+            <button class="btn btn-outline-info ms-2" onclick="debugTable()">
+                <i class="fas fa-bug"></i> Debug Tabla
+            </button>
+        </h1>
+        
+        <!-- Test 1: Alert Light con Table -->
+        <div class="test-section">
+            <h3 class="test-title">1. Alert Light con Table</h3>
+            <div class="alert alert-light">
+                <h6><i class="fas fa-calendar-alt me-2"></i>Proyección Detallada por Año</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Año</th>
+                                <th>Balance Inicial</th>
+                                <th>Pérdida por Inflación</th>
+                                <th>Crecimiento</th>
+                                <th>Balance Final</th>
+                                <th>Poder Adquisitivo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Año 1</strong></td>
+                                <td>1,000,000 COP</td>
+                                <td class="text-danger">-50,000 COP</td>
+                                <td class="text-success">+100,000 COP</td>
+                                <td><strong>1,050,000 COP</strong></td>
+                                <td><span class="badge bg-success">95.2%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Año 2</strong></td>
+                                <td>1,050,000 COP</td>
+                                <td class="text-danger">-52,500 COP</td>
+                                <td class="text-success">+105,000 COP</td>
+                                <td><strong>1,102,500 COP</strong></td>
+                                <td><span class="badge bg-warning">90.5%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Año 3</strong></td>
+                                <td>1,102,500 COP</td>
+                                <td class="text-danger">-55,125 COP</td>
+                                <td class="text-success">+110,250 COP</td>
+                                <td><strong>1,157,625 COP</strong></td>
+                                <td><span class="badge bg-danger">85.8%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Test 2: Alert Info -->
+        <div class="test-section">
+            <h3 class="test-title">2. Alert Info</h3>
+            <div class="alert alert-info">
+                <h6><i class="fas fa-info-circle me-2"></i>Información de Inflación</h6>
+                <p>Esta es una alerta de información para probar el modo oscuro.</p>
+            </div>
+        </div>
+        
+        <!-- Test 3: Alert Warning -->
+        <div class="test-section">
+            <h3 class="test-title">3. Alert Warning</h3>
+            <div class="alert alert-warning">
+                <h6><i class="fas fa-exclamation-triangle me-2"></i>Advertencia</h6>
+                <p>Esta es una alerta de advertencia para probar el modo oscuro.</p>
+            </div>
+        </div>
+        
+        <!-- Test 4: Table Hover -->
+        <div class="test-section">
+            <h3 class="test-title">4. Table con Hover</h3>
+            <div class="alert alert-light">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>País</th>
+                            <th>Inflación</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Colombia</td>
+                            <td>5.2%</td>
+                            <td><span class="badge bg-warning">Alta</span></td>
+                        </tr>
+                        <tr>
+                            <td>Estados Unidos</td>
+                            <td>3.1%</td>
+                            <td><span class="badge bg-success">Normal</span></td>
+                        </tr>
+                        <tr>
+                            <td>Venezuela</td>
+                            <td>172.0%</td>
+                            <td><span class="badge bg-danger">Crítica</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Test 5: Badges -->
+        <div class="test-section">
+            <h3 class="test-title">5. Badges</h3>
+            <div class="alert alert-light">
+                <p>Probando diferentes badges:</p>
+                <span class="badge bg-success me-2">Éxito</span>
+                <span class="badge bg-warning me-2">Advertencia</span>
+                <span class="badge bg-danger me-2">Peligro</span>
+                <span class="badge bg-info me-2">Info</span>
+                <span class="badge bg-primary me-2">Primario</span>
+                <span class="badge bg-secondary me-2">Secundario</span>
+            </div>
+        </div>
+        
+        <!-- Test 6: Text Colors -->
+        <div class="test-section">
+            <h3 class="test-title">6. Colores de Texto</h3>
+            <div class="alert alert-light">
+                <p class="text-primary">Texto primario</p>
+                <p class="text-secondary">Texto secundario</p>
+                <p class="text-success">Texto de éxito</p>
+                <p class="text-danger">Texto de peligro</p>
+                <p class="text-warning">Texto de advertencia</p>
+                <p class="text-info">Texto informativo</p>
+                <p class="text-muted">Texto atenuado</p>
+            </div>
+        </div>
+        
+        <!-- Debug Info -->
+        <div class="test-section">
+            <h3 class="test-title">7. Información de Debug</h3>
+            <div class="alert alert-light">
+                <p><strong>Tema actual:</strong> <span id="current-theme">Claro</span></p>
+                <p><strong>Clases aplicadas:</strong></p>
+                <ul id="applied-classes">
+                    <li>alert-light</li>
+                    <li>table</li>
+                    <li>table-sm</li>
+                    <li>table-hover</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.getElementById('dark-mode-icon');
+            const themeSpan = document.getElementById('current-theme');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.className = 'fas fa-toggle-off';
+                themeSpan.textContent = 'Claro';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-toggle-on';
+                themeSpan.textContent = 'Oscuro';
+            }
+        }
+        
+        function debugTable() {
+            const table = document.querySelector('.alert-light .table.table-sm');
+            if (table) {
+                console.log('=== DEBUG TABLA ===');
+                console.log('Tabla encontrada:', table);
+                console.log('Clases de la tabla:', table.className);
+                console.log('Tema actual:', document.body.getAttribute('data-theme'));
+                
+                // Check computed styles
+                const computedStyle = window.getComputedStyle(table);
+                console.log('Background color:', computedStyle.backgroundColor);
+                console.log('Color:', computedStyle.color);
+                
+                // Check first row
+                const firstRow = table.querySelector('tbody tr');
+                if (firstRow) {
+                    const rowStyle = window.getComputedStyle(firstRow);
+                    console.log('Primera fila background:', rowStyle.backgroundColor);
+                    console.log('Primera fila color:', rowStyle.color);
+                }
+                
+                // Check first cell
+                const firstCell = table.querySelector('tbody td');
+                if (firstCell) {
+                    const cellStyle = window.getComputedStyle(firstCell);
+                    console.log('Primera celda background:', cellStyle.backgroundColor);
+                    console.log('Primera celda color:', cellStyle.color);
+                }
+                
+                alert('Revisa la consola del navegador (F12) para ver los estilos aplicados');
+            } else {
+                alert('No se encontró la tabla');
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if dark mode is already set
+            if (document.body.getAttribute('data-theme') === 'dark') {
+                document.getElementById('dark-mode-icon').className = 'fas fa-toggle-on';
+                document.getElementById('current-theme').textContent = 'Oscuro';
+            }
+        });
+    </script>
+</body>
+</html>
